@@ -11,7 +11,10 @@ export class User {
     })
     username: string;
 
-    @Prop()
+    @Prop({
+        unique: true,
+        sparse: true,
+    })
     email: string;
 
     @Prop({
