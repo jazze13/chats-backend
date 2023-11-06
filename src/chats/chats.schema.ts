@@ -1,7 +1,9 @@
-import { Prop, Schema } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { Message } from '../messages/messages.schema';
 import { User } from '../users/users.schema';
+
+export type ChatDocument = HydratedDocument<Chat>;
 
 @Schema({ timestamps: true })
 export class Chat {
@@ -33,3 +35,5 @@ export class Chat {
     })
     participants: User[];
 }
+
+export const ChatSchema = SchemaFactory.createForClass(Chat);
