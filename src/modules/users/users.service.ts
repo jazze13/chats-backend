@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-    async create(userDto: CreateUserDto): Promise<User> {
+    async create(userDto: CreateUserDto) {
         const userFromDb = await this.userModel.findOne({ username: userDto.username }).exec();
 
         if (userFromDb) {
