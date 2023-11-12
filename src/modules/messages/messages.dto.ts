@@ -1,11 +1,16 @@
 import { IsNotEmpty } from 'class-validator';
+import { UserDto } from '../users/users.dto';
 
 export class MessageDto {
-    authorId: string;
+    author: UserDto;
 
     chatId: string;
 
     body: string;
+
+    createdAt: string;
+
+    updatedAt: string;
 }
 
 export class CreateMessageDto {

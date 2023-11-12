@@ -1,15 +1,15 @@
 import { IsNotEmpty } from 'class-validator';
-import { Message } from '../messages/messages.schema';
-import { User } from '../users/users.schema';
+import { UserDto } from '../users/users.dto';
+import { MessageDto } from '../messages/messages.dto';
 
-export class ChatsDto {
+export class ChatDto {
     name: string;
 
     description?: string;
 
-    participants: User[];
+    participants: UserDto[];
 
-    messages: Message[];
+    lastMessage: MessageDto;
 }
 
 export class CreateChatDto {

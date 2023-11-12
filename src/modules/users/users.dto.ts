@@ -13,3 +13,7 @@ export class LoginUserDto {
 
     password: string;
 }
+
+export class UserDto {
+    username: string;
+}
