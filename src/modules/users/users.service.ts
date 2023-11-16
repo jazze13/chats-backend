@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateUserDto, LoginUserDto } from './users.dto';
+import { CreateUserDto, LoginUserDto, UserDto } from './users.dto';
 import { Model } from 'mongoose';
 import { User } from './users.schema';
 import * as bcrypt from 'bcrypt';
@@ -46,13 +46,16 @@ export class UsersService {
         return user;
     }
 
-    async findByUsername(username: string) {
-        const user = await this.userModel.findOne({ username }).exec();
+    async findById(id: string): Promise<UserDto> {
+        const user = await this.userModel.findOne({ _id: id }).exec();
 
         if (!user) {
             throw new HttpException("User doesn't exist", HttpStatus.BAD_REQUEST);
         }
 
-        return user;
+        return {
+            id: user.id,
+            username: user.username,
+        };
     }
 }

@@ -14,7 +14,7 @@ export class AuthService {
     async register(userDto: CreateUserDto) {
         const user = await this.usersService.create(userDto);
 
-        const token = this.generateToken(user);
+        const token = this.generateToken(user.id);
 
         return {
             token,
@@ -25,7 +25,7 @@ export class AuthService {
     async login(userDto: LoginUserDto) {
         const user = await this.usersService.authenticate(userDto);
 
-        const token = this.generateToken(user);
+        const token = this.generateToken(user.id);
 
         return {
             token,
@@ -33,8 +33,8 @@ export class AuthService {
         };
     }
 
-    async validate({ username }: JwtPayload) {
-        const user = await this.usersService.findByUsername(username);
+    async validate({ id }: JwtPayload) {
+        const user = await this.usersService.findById(id);
 
         if (!user) {
             throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
@@ -43,8 +43,8 @@ export class AuthService {
         return user;
     }
 
-    private generateToken({ username }: LoginUserDto) {
-        const user: JwtPayload = { username };
+    private generateToken(userId: string) {
+        const user: JwtPayload = { id: userId };
         return this.jwtService.sign(user);
     }
 }
