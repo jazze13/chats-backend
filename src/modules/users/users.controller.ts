@@ -6,7 +6,7 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Get('/:id')
-    async getProfile(@Param() params: { id: string }) {
+    async getUser(@Param() params: { id: string }) {
         return await this.usersService.findById(params.id);
     }
 }
