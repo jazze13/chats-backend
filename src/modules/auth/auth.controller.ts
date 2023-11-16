@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { CreateUserDto, LoginUserDto } from '../users/users.dto';
 import { UsersService } from '../users/users.service';
 import { Request } from 'src/types/types';
+import { Public } from './public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -12,12 +13,14 @@ export class AuthController {
     ) {}
 
     @UsePipes(new ValidationPipe())
+    @Public()
     @Post('signup')
     async signup(@Body() userDto: CreateUserDto) {
         return await this.authService.register(userDto);
     }
 
     @UsePipes(new ValidationPipe())
+    @Public()
     @Post('login')
     async login(@Body() userDto: LoginUserDto) {
         return await this.authService.login(userDto);
