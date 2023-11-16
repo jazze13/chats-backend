@@ -18,7 +18,10 @@ export class AuthService {
 
         return {
             token,
-            subject: user,
+            subject: {
+                id: user.id,
+                username: user.username,
+            },
         };
     }
 
@@ -29,7 +32,10 @@ export class AuthService {
 
         return {
             token,
-            subject: user,
+            subject: {
+                id: user.id,
+                username: user.username,
+            },
         };
     }
 
