@@ -17,7 +17,7 @@ export class ChatsController {
 
     @Get()
     async getUserChats(@Req() request: Request) {
-        return await this.chatsService.getAllByUserId(request.user);
+        return await this.chatsService.filterByUserId(request.user);
     }
 
     @UsePipes(new ValidationPipe())
